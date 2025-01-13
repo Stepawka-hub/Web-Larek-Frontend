@@ -1,11 +1,16 @@
 // Модель данных продукта
-interface IProduct {
+export interface IProduct {
   id: string;
   category: string;
   name: string;
   description: string;
   image: string;
   price: number;
+}
+
+export interface IResponseProduct {
+  count: number;
+  items: IProduct[];
 }
 
 // Модель данных каталога

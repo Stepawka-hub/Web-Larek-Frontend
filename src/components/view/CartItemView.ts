@@ -1,5 +1,5 @@
-import { IView } from '../types/views';
-import { IEvents } from './base/events';
+import { IView } from '../../types/views';
+import { IEvents } from '../base/events';
 
 class CartItemView implements IView {
   protected title: HTMLSpanElement;

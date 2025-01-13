@@ -1,4 +1,4 @@
-import { IEvents } from './base/events';
+import { IEvents } from '../base/events';
 import { BaseView } from './BaseView';
 
 class CartView extends BaseView {
