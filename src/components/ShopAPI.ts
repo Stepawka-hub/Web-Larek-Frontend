@@ -1,8 +1,8 @@
 import { Api } from './base/api'
-import { IProduct, IResponseProduct } from '../types/models'
+import { ICatalogItem, IResponseProduct } from '../types/models'
 
 interface IShopAPI {
-  getCatalogItems: () => Promise<IProduct[]>;
+  getCatalogItems: () => Promise<ICatalogItem[]>;
 }
 
 export class ShopAPI extends Api implements IShopAPI {
@@ -13,7 +13,7 @@ export class ShopAPI extends Api implements IShopAPI {
     this.cdn = cdn;
   }
 
-  getCatalogItems(): Promise<IProduct[]> {
+  getCatalogItems(): Promise<ICatalogItem[]> {
     return this.get(`/product/`).then(
       (data: IResponseProduct) => data.items.map((item) => ({
         ...item,

@@ -22,12 +22,12 @@ class CartItemView implements IView {
 
   render(data: { id: string, title: string, price: number }) {
     if (data) {
-      // Если есть новые данные, то запомним их
-      this.id = data.id;
+      // // Если есть новые данные, то запомним их
+      // this.id = data.id;
 
-      // Выведем в интерфейс
-      this.title.textContent = data.title;
-      this.price.textContent = data.price + ' синапсов';
+      // // Выведем в интерфейс
+      // this.title.textContent = data.title;
+      // this.price.textContent = data.price + ' синапсов';
     }
 
     return this.container;
