@@ -113,15 +113,16 @@ const renderBasket = () => {
 
 events.on('ui:basket:add', (item: CatalogItem) => {
 	app.addToBasket(item.id);
+	page.counter = app.getBasketLength();
 	modal.close();
 });
 
 events.on('ui:basket:remove', (data: { id: string }) => {
 	app.removeFromBasket(data.id);
+	page.counter = app.getBasketLength();
 });
 
 events.on('basket.items:changed', () => {
-	page.counter = app.getBasketLength();
 	modal.render({
 		content: renderBasket()
 	});

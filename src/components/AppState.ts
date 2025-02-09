@@ -40,15 +40,12 @@ export class AppState extends Model<IAppState> {
 	addToBasket(itemId: string) {
 		if (!this._basket.includes(itemId)) {
 			this._basket.push(itemId);
-			this.emitChanges('catalog.items:changed');
 		}
-    console.log(this._basket);
 	}
 
   removeFromBasket(itemId: string) {
     this._basket = this._basket.filter(id => id !== itemId);
     this.emitChanges('basket.items:changed');
-    console.log(this._basket);
   }
 
 	isInBasket(itemid: string) {
