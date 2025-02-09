@@ -5,12 +5,14 @@ import {ensureElement} from "../../utils/utils";
 interface IPage {
   catalog: HTMLElement[];
   locked: boolean;
+  counter: number;
 }
 
 export class Page extends Component<IPage> {
   _wrapper: HTMLElement;
   _catalog: HTMLElement;
   _basket: HTMLElement;
+  _basketCounter: HTMLElement;
 
   constructor(container: HTMLElement, protected events: IEvents) {
     super(container);
@@ -18,6 +20,7 @@ export class Page extends Component<IPage> {
     this._wrapper = ensureElement<HTMLElement>('.page__wrapper');
     this._catalog = ensureElement<HTMLElement>('.gallery');
     this._basket = ensureElement<HTMLElement>('.header__basket');
+    this._basketCounter = ensureElement<HTMLElement>('.header__basket-counter');
 
     this._basket.addEventListener('click', () => {
       this.events.emit('ui:basket:open');
@@ -34,5 +37,9 @@ export class Page extends Component<IPage> {
     } else {
       this.removeClass(this._wrapper, 'page__wrapper_locked');
     }
+  }
+
+  set counter(count: number) {
+    this.setText(this._basketCounter, count);
   }
 }
