@@ -14,7 +14,7 @@ class BasketItem extends Component<IBasketItem> implements IView {
   protected _index: HTMLSpanElement;
   protected _removeButton: HTMLButtonElement;
 
-  constructor(protected container: HTMLElement, protected events?: IEvents) {
+  constructor(protected container: HTMLElement, protected events?: IEvents, actions?: IBasketItemAction) {
     super(container);
 
     // Инициализируем
@@ -24,9 +24,9 @@ class BasketItem extends Component<IBasketItem> implements IView {
     this._removeButton = container.querySelector('.basket__item-delete') as HTMLButtonElement;
 
     // Устанавливаем слушатель события
-    // this._removeButton.addEventListener('click', () => {
-    //   this.events.emit('ui:basket-remove', { id: this.id });
-    // });
+    if (actions) {
+      this._removeButton.addEventListener('click', actions.onClick);
+    }
   }
 
   set title(title: string) {

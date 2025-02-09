@@ -50,46 +50,6 @@ events.on('catalog.items:changed', () => {
 	});
 });
 
-events.on('ui:card-selected', (item: CatalogItem) => {
-	app.setPreview(item);
-});
-
-events.on('ui:modal:open', () => {
-	page.locked = true;
-});
-
-events.on('ui:modal:close', () => {
-	page.locked = false;
-});
-
-events.on('ui:basket:add', (item: CatalogItem) => {
-	app.addToBasket(item.id);
-	modal.close();
-});
-
-events.on('ui:basket:open', () => {
-  const items = app.catalog.filter((item) => app.isInBasket(item.id));
-  const basketItems = items.map((item, index) => {
-    const basketItem = new BasketItem(cloneTemplate(cardBasketTemplate), events);
-    return basketItem.render({
-      title: item.title,
-      price: item.price,
-      index: index + 1
-    });
-  });
-
-  const totalPrice = items.reduce((sum, current) => {
-    return sum + current.price;
-  }, 0)
-
-	modal.render({
-		content: basket.render({
-      items: basketItems,
-      totalPrice
-    }),
-	});
-});
-
 events.on('preview:changed', (item: CatalogItem) => {
 	const cardPreview = new CardPreview(
 		cloneTemplate(cardPreviewTemplate),
@@ -108,6 +68,68 @@ events.on('preview:changed', (item: CatalogItem) => {
 			price: item.price,
 			isInBasket: app.isInBasket(item.id),
 		}),
+	});
+});
+
+events.on('ui:card-selected', (item: CatalogItem) => {
+	app.setPreview(item);
+});
+
+events.on('ui:modal:open', () => {
+	page.locked = true;
+});
+
+events.on('ui:modal:close', () => {
+	page.locked = false;
+});
+
+// Basket - обработчики
+const renderBasket = () => {
+	const items = app.catalog.filter((item) => app.isInBasket(item.id));
+	const basketItems = items.map((item, index) => {
+		const basketItem = new BasketItem(
+			cloneTemplate(cardBasketTemplate),
+			events,
+			{
+				onClick: () => events.emit('ui:basket:remove', { id: item.id }),
+			}
+		);
+		return basketItem.render({
+			title: item.title,
+			price: item.price,
+			index: index + 1,
+		});
+	});
+
+	const totalPrice = items.reduce((sum, current) => {
+		return sum + current.price;
+	}, 0);
+
+	return basket.render({
+		items: basketItems,
+		totalPrice,
+	});
+};
+
+events.on('ui:basket:add', (item: CatalogItem) => {
+	app.addToBasket(item.id);
+	modal.close();
+});
+
+events.on('ui:basket:remove', (data: { id: string }) => {
+	app.removeFromBasket(data.id);
+});
+
+events.on('basket.items:changed', () => {
+	page.counter = app.getBasketLength();
+	modal.render({
+		content: renderBasket()
+	});
+});
+
+events.on('ui:basket:open', () => {
+	modal.render({
+		content: renderBasket()
 	});
 });
 

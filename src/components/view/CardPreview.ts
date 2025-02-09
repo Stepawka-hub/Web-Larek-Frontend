@@ -2,17 +2,14 @@ import { IView } from '../../types/views';
 import { IEvents } from '../base/events';
 
 import Card from './Card';
+import { ICardAction } from './Card';
 import { ensureElement } from '../../utils/utils';
-
-interface ICardPreviewAction {
-  onClick: (event: MouseEvent) => void;
-}
 
 class CardPreview extends Card implements IView {
   protected _description: HTMLParagraphElement;
   protected _addToCardButton: HTMLButtonElement;
 
-  constructor (protected container: HTMLElement, protected events?: IEvents, protected actions?: ICardPreviewAction) {
+  constructor (protected container: HTMLElement, protected events?: IEvents, protected actions?: ICardAction) {
     super(container, events);
 
     this._description = ensureElement<HTMLParagraphElement>('.card__text');
