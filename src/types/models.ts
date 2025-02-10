@@ -29,5 +29,27 @@ export interface IResponseProduct {
 }
 
 export interface IAppState {
-  catalogItems: ICatalogItem;
+  catalog: ICatalogItem[];
+  basket: IBasketState;
+  preview: string | null;
+  modal: boolean;
+  loadingCatalog: boolean;
 }
+
+export interface IBasketState {
+  basketItems: string[];
+}
+
+// OrderForm
+export interface IOrder {
+  paymentMethod: string;
+  address: string;
+}
+
+// ContactsForm
+export interface IContacts {
+  email: string;
+  phone: string;
+}
+
+export type FormErrors = Partial<Record<keyof IOrder | keyof IContacts, string>>;

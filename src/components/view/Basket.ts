@@ -21,7 +21,7 @@ class Basket extends Component<IBasketData> implements IView {
     this._arrange = container.querySelector('.basket__button') as HTMLButtonElement;
 
     this._arrange.addEventListener('click', () => {
-      this.events.emit('ui:basket:arrange');
+      this.events.emit('ui:order:open');
     });
   }
 
