@@ -18,7 +18,7 @@ export class ShopAPI extends Api implements IShopAPI {
       (data: IResponseProduct) => data.items.map((item) => ({
         ...item,
         image: this.cdn + item.image
-    }))
+      }))
     );
   }
 }

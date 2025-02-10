@@ -26,12 +26,12 @@ export class Form<T> extends Component<IFormState> {
 
         this.container.addEventListener('submit', (e: Event) => {
             e.preventDefault();
-            this.events.emit(`${this.container.name}:submit`);
+            this.events.emit(`ui:${this.container.name}:submit`);
         });
     }
 
     protected onInputChange(field: keyof T, value: string) {
-        this.events.emit(`${this.container.name}.${String(field)}:change`, {
+        this.events.emit(`ui:${this.container.name}.${String(field)}:change`, {
             field,
             value
         });
@@ -50,6 +50,5 @@ export class Form<T> extends Component<IFormState> {
         super.render({valid, errors});
         Object.assign(this, inputs);
         return this.container;
-
     }
 }

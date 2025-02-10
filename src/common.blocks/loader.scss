@@ -1,0 +1,32 @@
+@use "variables" as *;
+@use "mixins";
+
+.loader {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  width: 50%;
+  margin: 0 auto;
+  padding: 1rem;
+
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+
+  &__image {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+
+  &__text{
+    font-size: 1.5rem;
+    color: $secondary;
+    text-align: center;
+  }
+
+  &_active {
+    display: flex;
+  }
+}
