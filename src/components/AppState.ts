@@ -8,7 +8,7 @@ class AppState extends Model<IAppState> {
 	protected _catalog: CatalogItem[] = [];
 	protected _basket: BasketState;
 	protected _preview: string | null = null;
-	protected _loadingCatalog: boolean = false;
+	protected _loadingCatalog = false;
 	protected _order: IOrder = {
 		paymentMethod: 'card',
 		address: ''
