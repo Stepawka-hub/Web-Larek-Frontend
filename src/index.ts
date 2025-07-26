@@ -198,9 +198,6 @@ events.on('contacts:formErrors:change', (errors: Partial<IContacts>) => {
 });
 
 events.on('ui:contacts:submit', () => {
-	// Убрать
-	alert(`Заказ: \n${JSON.stringify(appState.formOrder())}`);
-
 	const successModal = new Success(cloneTemplate(successTemplate), {
 		onClick: () => modal.close()
 	});
